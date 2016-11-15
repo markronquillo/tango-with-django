@@ -1,45 +1,38 @@
-<!DOCTYPE html>
+{% extends 'rango/base.html' %}
 {% load staticfiles %}
-<html>
-    <head>
-        <title>Rango</title>
-        <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    </head>
-    <head>
-        <h1>Rango says...</h1>
-            hey there partner! <br />
-            <a href="{% url 'rango:add_category' %}">Add new Category</a>
-        <div>
-            <h3>Most Liked Categories</h3>    
-            {% if categories %}
-            <ul>
-                {% for category in categories %}
-                    <li> <a href="{% url 'rango:show_category' category.slug %}">{{ category.name }} </a></li>
-                {% endfor %}
-            </ul>
-            {% else %}
-                <strong>There are no categories present.</strong>
-            {% endif %}
-        </div>
 
-        <div>
-            <h3>Most Viewed Pages</h3>    
+{% block title_block %}
+    Index
+{% endblock %}
 
-            {% if pages %}
-            <ul>
-                {% for page in pages %}
-                    <li> <a href="/">{{ page.title }} </a></li>
-                {% endfor %}
-            </ul>
-            {% else %}
-                <strong>There are no pages present.</strong>
-            {% endif %}
+{% block body_block %}
+    <h1>Rango says...</h1>
+        hey there partner! <br />
+    <div>
+        <h3>Most Liked Categories</h3>    
+        {% if categories %}
+        <ul>
+            {% for category in categories %}
+                <li> <a href="{% url 'rango:show_category' category.slug %}">{{ category.name }} </a></li>
+            {% endfor %}
+        </ul>
+        {% else %}
+            <strong>There are no categories present.</strong>
+        {% endif %}
+    </div>
 
-        </div>
-        <div>
-            <a href="/rango/about/">About</a> <br />
-        </div>
+    <div>
+        <h3>Most Viewed Pages</h3>    
 
-        <script src="{% static 'js/main.js' %}"></script>
-    </head>
-</html>
+        {% if pages %}
+        <ul>
+            {% for page in pages %}
+                <li> <a href="/">{{ page.title }} </a></li>
+            {% endfor %}
+        </ul>
+        {% else %}
+            <strong>There are no pages present.</strong>
+        {% endif %}
+
+    </div>
+{% endblock %}
